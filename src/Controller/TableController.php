@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Table;
 use App\Form\TableChoiceType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/table", name="table")
@@ -27,23 +28,26 @@ class TableController extends AbstractController
             $max = $data['table_max'];
             $color = $data['table_color'];
 
+            $table = new Table($n);
+            $calculations = $table->calcMultiply($max);
+
             $response = $this->render('table/index.html.twig', [
-                'form' => $form->createView(),
-                'n' => $n,
-                'max' => $max,
+                'calculations' => $calculations,
                 'color' => $color,
+                'n' => $n,
             ]);
         } else {
-            $response = $this->render('table/index.html.twig', [
-                'form' => $form->createView(),
+            $response = $this->render('table/vue.html.twig', [
+                'formulaire' => $form->createView(),
             ]);
         }
+        return $response;
     }
     
     /**
-     * @Route("/print/{n}/{max}", name="table_print")
+     * @Route("/print/{n}/{max}/{color}", name="table_print")
      */
-    public function index(int $n, int $max, Request $request): Response
+    public function index(int $n, int $max, string $color, Request $request): Response
     {
         $color = $request->get('c');
         return $this->render('table/index.html.twig', [

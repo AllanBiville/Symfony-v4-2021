@@ -3,11 +3,10 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TableChoiceType extends AbstractType
 {
@@ -15,7 +14,7 @@ class TableChoiceType extends AbstractType
     {
         $builder->add('table_number', ChoiceType::class, [
             //'attr' => ['style' => 'width:35px'],
-            'choices'  => [
+            'choices' => [
                 'Table de 1' => 1,
                 'Table de 2' => 2,
                 'Table de 3' => 3,
@@ -28,7 +27,7 @@ class TableChoiceType extends AbstractType
             ],
         ])->add('table_max', ChoiceType::class, [
             //'attr' => ['style' => 'width:35px'],
-            'choices'  => [
+            'choices' => [
                 'Max 1' => 1,
                 'Max 2' => 2,
                 'Max 3' => 3,
@@ -41,7 +40,7 @@ class TableChoiceType extends AbstractType
             ],
         ])->add('table_color', ChoiceType::class, [
             //'attr' => ['style' => 'width:35px'],
-            'choices'  => [
+            'choices' => [
                 'Couleur rouge' => 'red',
                 'Couleur jaune' => 'yellow',
                 'Couleur orange' => 'orange',
@@ -53,11 +52,10 @@ class TableChoiceType extends AbstractType
                 'Couleur bleu' => 'blue',
             ],
         ])
-        
-        
-        ->add('Choisir', SubmitType::class, [
-            'attr' => ['class' => 'save'],
-        ]);
+
+            ->add('Choisir', SubmitType::class, [
+                'attr' => ['class' => 'save'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
